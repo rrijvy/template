@@ -1,3 +1,5 @@
+import { StorageKeys } from "../common/storageKeys";
+
 export class ClipboardTable extends HTMLElement {
   constructor() {
     super();
@@ -23,7 +25,7 @@ export class ClipboardTable extends HTMLElement {
     thCell1.textContent = "Text";
     thCell2.textContent = "Actions";
 
-    chrome.storage.local.get(this.storageKeys.clipboards, (res) => {
+    chrome.storage.local.get(StorageKeys.clipboards, (res) => {
       if (res && res.clipboards) {
         const clipboards = res.clipboards as string[];
         clipboards.forEach((clipboard) => {
@@ -34,10 +36,6 @@ export class ClipboardTable extends HTMLElement {
 
     shadow.appendChild(table);
   }
-
-  storageKeys = {
-    clipboards: "clipboards",
-  };
 
   getTableRowElement(data: string): HTMLTableRowElement {
     const tableRow = document.createElement("tr");
@@ -57,11 +55,11 @@ export class ClipboardTable extends HTMLElement {
     };
 
     deleteBtn.onclick = (event) => {
-      chrome.storage.local.get(this.storageKeys.clipboards, (res) => {
+      chrome.storage.local.get(StorageKeys.clipboards, (res) => {
         if (res && res.clipboards) {
           const clipboards = res.clipboards as string[];
           const newClipboards = clipboards.filter((x) => x !== data);
-          chrome.storage.local.set({ [this.storageKeys.clipboards]: [...newClipboards] });
+          chrome.storage.local.set({ [StorageKeys.clipboards]: [...newClipboards] });
         }
       });
     };

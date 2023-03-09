@@ -1,5 +1,5 @@
 {
-  "name": "Rx Extensions",
+  "name": "GENERIC EXTENSION",
   "description": "Base Level Extension",
   "version": "1.0",
   "manifest_version": 3,
@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.bundle.js"]
+      "js": ["dist/content.bundle.js"]
     }
   ],
   "permissions": ["bookmarks", "activeTab", "storage"]

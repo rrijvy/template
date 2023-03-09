@@ -18,7 +18,15 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: "ts-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["@babel/preset-env", { targets: "chrome 92" }],
+              "@babel/preset-typescript",
+            ],
+          },
+        },
         exclude: /node_modules/,
       },
     ],
